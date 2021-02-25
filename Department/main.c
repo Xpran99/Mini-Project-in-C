@@ -4,7 +4,6 @@
 #include<string.h>
 #include<ctype.h>
 #include<windows.h>
-
 #define ANS 15
 #define ACS 4
  COORD coord={0,0}; // this is global variable
@@ -216,15 +215,15 @@ void bill()
   rewind(file);
   system("cls");
   dbill();
-  gotoxy(26,15);printf("enter  \"end\" to finish input");
+  gotoxy(26,15);printf("Enter  \"end\" to finish input");
   while(1){
   gotoxy(25,18);printf("                    ");
   gotoxy(25,19);printf("                    ");
-  gotoxy(25,18);printf("enter item code:");
+  gotoxy(25,18);printf("Enter item code:");
   scanf("%s",x);
   if(strcmp(x,"end")==0)
    break;
-  gotoxy(25,19);printf("enter quantity:");
+  gotoxy(25,19);printf("Enter quantity:");
   scanf("%d",&q);
   rewind(file);
   while(fread(&item,sizeof(item),1,file)){
@@ -260,11 +259,12 @@ void dbill()
  //;
  for (i=1;i<=10;i++)
   printf("*");
- printf(" * FASHION WEAR * ");
+ printf(" * Dashboard * ");
+
  for (i=1;i<=10;i++)
         printf("*");
  printf("\n\n");
- gotoxy(30,11);printf("Departmental Store");
+ gotoxy(30,11);printf("Fashion Store");
  //textcolor(1);
  gotoxy(32,25);printf("CUSTOMER'S BILL") ;
  //textcolor(8);
@@ -311,13 +311,13 @@ void c_code(char y[])
   gotoxy(32,18);printf(" ADD ARTICLES ")  ;
   flag=1;
   rewind(file);
-  gotoxy(22,25);printf("Enter new code of the article:");
+  gotoxy(22,25);printf("Enter new code of the Item:");
   scanf(" %[^\n]",y);
   while(fread(&item,sizeof(item),1,file)==1){
    if (strcmp(y,item.code)==0){
     flag=0;
-    gotoxy(26,30);printf("code already exists");
-    gotoxy(29,32);printf("enter again");getch();
+    gotoxy(26,30);printf("Code already exists");
+    gotoxy(29,32);printf("Enter again");getch();
     break;
    }
   }
@@ -337,9 +337,9 @@ void edit()
  //textcolor(0);
  //textbackground(11);
  window(20,63,20,46);
- gotoxy(35,18);printf("EDIT RECORDS");
+ gotoxy(35,18);printf("EDIT Item");
  ;
- gotoxy(25,23);printf("enter item code: ");
+ gotoxy(25,23);printf("Enter item code: ");
  scanf("%s",x);
  flag=check(x);
  if(flag==0){
@@ -348,26 +348,26 @@ void edit()
   while (fread(&item,sizeof (item),1,file)){
    if(strcmp(item.code,x)==0){
     //textcolor(0);
-    gotoxy(25,27);printf("name       = %s",item.name);
-    gotoxy(25,28);printf("code       = %s",item.code);
-    gotoxy(25,29);printf("rate       = %g",item.rate);
-    gotoxy(25,30);printf("quantity   = %d",item.quantity);
-    gotoxy(25,32);; printf("do you want to edit this record(y/n):");
+    gotoxy(25,27);printf("Name       = %s",item.name);
+    gotoxy(25,28);printf("Code       = %s",item.code);
+    gotoxy(25,29);printf("Rate       = %g",item.rate);
+    gotoxy(25,30);printf("Quantity   = %d",item.quantity);
+    gotoxy(25,32);; printf("Do you want to edit this record(y/n):");
     fflush(file);
     if(toupper(getche())=='Y'){
      //textcolor(0);
-     gotoxy(25,34); printf("1- edit name ");
-     gotoxy(25,35); printf("2- edit code ");
-     gotoxy(25,36); printf("3- edit rate ");
-     gotoxy(25,37); printf("4- edit quantity ");
-     gotoxy(25,39);  ; printf(" enter your choice(1, 2, 3, 4) ");
+     gotoxy(25,34); printf("1- Edit name ");
+     gotoxy(25,35); printf("2- Edit code ");
+     gotoxy(25,36); printf("3- Edit rate ");
+     gotoxy(25,37); printf("4- Edit quantity ");
+     gotoxy(25,39);  ; printf(" Enter your choice (1, 2, 3, 4) ");
      scanf("%d",&choice);
      switch(choice){
       case 1:
        system("cls");
        window(23,48,20,40);
        gotoxy(35,18);printf("EDIT RECORDS");
-       gotoxy(25,24); printf(" enter new name: ");
+       gotoxy(25,24); printf(" Enter new name: ");
        scanf("%s",item.name);
        size=sizeof(item);
        fseek(file,-size,SEEK_CUR);fwrite(&item,sizeof(item),1,file);
@@ -387,7 +387,7 @@ void edit()
        window(23,65,20,40);
        gotoxy(35,18);printf("EDIT RECORDS");
        gotoxy(25,24);
-       printf(" enter new rate: ");
+       printf(" Enter new rate: ");
        scanf("%f",&item.rate);
        size=sizeof(item);
        fseek(file,-size,SEEK_CUR);fwrite(&item,sizeof(item),1,file);
@@ -397,21 +397,21 @@ void edit()
        window(23,65,20,40);
        gotoxy(35,18);printf("EDIT RECORDS");
        gotoxy(25,24);
-       printf(" enter new quantity: ");
+       printf(" Enter new quantity: ");
        scanf("%d",&item.quantity);
        size=sizeof(item);
        fseek(file,-size,1);fwrite(&item,sizeof(item),1,file);
        break;
      }
-     gotoxy(27,30);printf("--- item edited---");
+     gotoxy(27,30);printf("--- Item edited---");
      break;
     }
    }
   }
  }
  if (flag==1){
-  gotoxy(32,30);printf("item does not exist");
-  gotoxy(36,32);printf("TRY ABGAIN");
+  gotoxy(32,30);printf("Item does not exist");
+  gotoxy(36,32);printf("TRY AGAIN");
  }
  getch();
  fclose(file);
@@ -433,7 +433,7 @@ void d_all()
   i++;
   j++;
   if ((j%20)==0){
-         gotoxy(27,47);/*textcolor(0)*/;printf("press any key to see more...........");
+         gotoxy(27,47);/*textcolor(0)*/;printf("****Press any key to see more.....****");
          getch();
          system("cls");
          dis_con();
@@ -443,7 +443,7 @@ void d_all()
   }
   getch();
   if (i==26) {
-  gotoxy(24,30); printf("-- no articles found --");
+  gotoxy(24,30); printf("-- No articles found --");
  }
  getch();
  fclose(file);
@@ -460,9 +460,9 @@ void d_quan()
   file=fopen("record.txt","rb");
   rewind(file);
   i=26;
-  gotoxy(16,20);;printf("enter lower range: ");
+  gotoxy(16,20);;printf("Enter lower range: ");
   scanf("%d",&a);
-  gotoxy(16,21);printf("enter upper range:");
+  gotoxy(16,21);printf("Enter upper range:");
   scanf("%d",&b);
   fflush(file);
   while(fread(&item,sizeof(item),1,file)){
@@ -471,7 +471,7 @@ void d_quan()
    i++;
    j++;
    if ((j%20)==0){
-    gotoxy(27,47);printf("press any key to see more...........");
+    gotoxy(27,47);printf("Press any key to see more...........");
     getch();
     system("cls");
     dis_con();
@@ -482,7 +482,7 @@ void d_quan()
   }
   getch();
   if (i==26){
-  gotoxy(28,30); printf(" no item found ");
+  gotoxy(28,30); printf(" No item found ");
  }
  getch();
  d_search();
@@ -498,9 +498,9 @@ void d_rate(){
   file=fopen("record.txt","rb");
   rewind(file);
   i=26;
-  gotoxy(16,20);;printf("enter lower range: ");
+  gotoxy(16,20);;printf("Enter lower range: ");
   scanf("%f",&a);
-  gotoxy(16,21);printf("enter upper range: ");
+  gotoxy(16,21);printf("Enter upper range: ");
   scanf("%f",&b);
   fflush(file);
   while(fread(&item,sizeof(item),1,file)){
@@ -509,7 +509,7 @@ void d_rate(){
    i++;
    j++;
    if ((j%20)==0){
-    gotoxy(27,47);printf("press any key to see more...........");
+    gotoxy(27,47);printf("Press any key to see more...........");
     getch();
     system("cls");
     dis_con();
@@ -520,7 +520,7 @@ void d_rate(){
   }
  getch();
  if (i==26){
-  gotoxy(28,30); printf(" no item found ");
+  gotoxy(28,30); printf(" No item found ");
  }
  getch();
  fclose(file);
@@ -537,7 +537,7 @@ void d_code()
   file=fopen("record.txt","rb");
   rewind(file);
   i=26;
-  gotoxy(16,20);;printf("enter item code: ");
+  gotoxy(16,20);;printf("Enter item code: ");
   scanf("%s",x);
   fflush(file);
   while(fread(&item,sizeof(item),1,file)){
@@ -549,7 +549,7 @@ void d_code()
   }
   }
   if (i==26){
-  gotoxy(28,30); printf("no item found");
+  gotoxy(28,30); printf("No item found");
   }
   getch();
   fclose(file);
@@ -569,7 +569,7 @@ void dis_con()
  for (i=1;i<=10;i++)
         printf("*");
  printf("\n\n");
- gotoxy(30,11);printf("Departmental Store");
+ gotoxy(30,11);printf("Fashion Store");
  //textcolor(1);
  gotoxy(32,17);printf("RECORDS") ;
  //textcolor(8);
@@ -597,24 +597,24 @@ void del()
  //textbackground(11);
  //textcolor(0);
  window(23,51,25,34);
- gotoxy(29,18);printf("DELETE ARTICLES");
- gotoxy(27,27);printf("enter item code: ");
+ gotoxy(29,18);printf("DELETE ITEM");
+ gotoxy(27,27);printf("Enter item code: ");
  scanf("%s",x);
  flag=check(x);
  if(flag==0){
-  file1=fopen("record1.txt","ab");
-  file=fopen("record.txt","rb");
+  file1=fopen("record1.txt","wb");
+  file=fopen("record.txt","wb");
   rewind(file);
   while (fread(&item,sizeof (item),1,file)){
    if(strcmp(item.code,x)!=0)
     fwrite(&item,sizeof(item),1,file1);
   }
-  gotoxy(27,29);printf("---item deleted---");
+  gotoxy(27,29);printf("---Item deleted---");
   remove("record.txt");
   rename("record1.txt","record.txt");
  }
  if (flag==1){
-  gotoxy(25,29);printf("---item does not exist---");
+  gotoxy(25,29);printf("---Item does not exist---");
   gotoxy(30,31);printf("TRY AGAIN");
  }
  fclose(file1);
@@ -649,11 +649,11 @@ void window(int a,int b,int c,int d)
  //textcolor(1);
  for (i=1;i<=10;i++)
   printf("*");
- printf(" * FASHION WEAR * ");
+ printf(" * FASHION STORE * ");
  for (i=1;i<=10;i++)
         printf("*");
  printf("\n\n");
- gotoxy(30,11);printf("Departmental Store");
+ gotoxy(30,11);printf("    Dashboard");
  //textcolor(4);
  for (i=a;i<=b;i++){
         gotoxy(i,17);printf("\xcd");
